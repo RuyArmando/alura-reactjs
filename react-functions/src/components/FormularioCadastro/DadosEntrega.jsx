@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import cep from "cep-promise";
 import { TextField, Button, MenuItem } from "@material-ui/core";
 
-function DadosEntrega() {
+function DadosEntrega({ aoEnviar }) {
+  const [cepEntrega, setCepEntrega] = useState("");
+  const [enderecoEntrega, setEnderecoEntrega] = useState("");
+  const [numeroEntrega, setNumeroEntrega] = useState("");
+  const [bairroEntrega, setBairroEntrega] = useState("");
+  const [cidadeEntrega, setCidadeEntrega] = useState("");
+  const [estadoEntrega, setEstadoEntrega] = useState("");
+
+  // {
+  //   "cep":  "05010000",
+  //   "state":  "SP",
+  //   "city":  "São Paulo",
+  //   "street":  "Rua Caiubí",
+  //   "neighborhood":  "Perdizes",
+  // }
+  function consultarCep(dados) {
+    cep(dados)
+      .then((result) => {
+        setEnderecoEntrega(result.street);
+        setBairroEntrega(result.neighborhood);
+        setCidadeEntrega(result.city);
+        setEstadoEntrega(result.state);
+      })
+      .catch(console.log);
+  }
+
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        aoEnviar({
+          cepEntrega,
+          enderecoEntrega,
+          numeroEntrega,
+          bairroEntrega,
+          cidadeEntrega,
+          estadoEntrega,
+        });
+      }}
+    >
       <TextField
+        value={cepEntrega}
+        onChange={(event) => setCepEntrega(event.target.value)}
+        onBlur={(event) => consultarCep(event.target.value)}
         id="cep"
         label="CEP"
         type="number"
@@ -12,6 +53,8 @@ function DadosEntrega() {
         margin="normal"
       />
       <TextField
+        value={enderecoEntrega}
+        onChange={(event) => setEnderecoEntrega(event.target.value)}
         id="endereco"
         label="Endereço"
         type="text"
@@ -20,6 +63,8 @@ function DadosEntrega() {
         fullWidth
       />
       <TextField
+        value={numeroEntrega}
+        onChange={(event) => setNumeroEntrega(event.target.value)}
         id="numero"
         label="Número"
         type="number"
@@ -27,6 +72,18 @@ function DadosEntrega() {
         margin="normal"
       />
       <TextField
+        value={bairroEntrega}
+        onChange={(event) => setBairroEntrega(event.target.value)}
+        id="bairro"
+        label="Bairro"
+        type="text"
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <TextField
+        value={cidadeEntrega}
+        onChange={(event) => setCidadeEntrega(event.target.value)}
         id="cidade"
         label="Cidade"
         type="text"
@@ -35,10 +92,10 @@ function DadosEntrega() {
         fullWidth
       />
       <TextField
+        value={estadoEntrega}
+        onChange={(event) => setEstadoEntrega(event.target.value)}
         id="estado"
         select
-        //value={age}
-        //onChange={handleChange}
         label="UF"
         variant="outlined"
         margin="normal"
