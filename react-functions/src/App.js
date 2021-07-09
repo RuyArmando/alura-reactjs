@@ -13,9 +13,7 @@ function App() {
       <Typography variant="h3" component="h1" align="center">
         Formulário de cadastro
       </Typography>
-      <ValidacoesCadastro.Provider
-        value={{ cpf: validarCPF, senha: validarSenha, nome: validarSenha }}
-      >
+      <ValidacoesCadastro.Provider value={{ cpf: validarCPF, senha: validarSenha, nome: validarSenha }}>
         <FormularioCadastro aoEnviar={handelEnviarForm} />
       </ValidacoesCadastro.Provider>
     </Container>
