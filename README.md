@@ -10,7 +10,7 @@ Este é um repositório do curso de React JS da Alura onde criamos um playground
 - [x] [React: Ciclo de vida dos componentes](https://cursos.alura.com.br/course/react-ciclo-de-vida)
 - [x] [React: Function Components, uma abordagem moderna](https://cursos.alura.com.br/course/react-function-components)
 - [x] [React: Hooks, Contextos e boas práticas](https://cursos.alura.com.br/course/react-hooks-e-formularios)
-- [ ] [React: Abstraindo seu CSS com Styled Components](https://cursos.alura.com.br/course/react-styled-components)
+- [x] [React: Abstraindo seu CSS com Styled Components](https://cursos.alura.com.br/course/react-styled-components)
 
 ### 📝 Licença
 
